@@ -2,12 +2,16 @@
 #include <string>
 #include <opencv2/core.hpp>
 
+using namespace cv;
+
 extern "C"{
     JNIEXPORT jstring JNICALL
     Java_com_narkang_opencvjni_MainActivity_stringFrom(JNIEnv *env, jobject instance);
     JNIEXPORT jintArray JNICALL
     Java_com_narkang_opencvjni_GrayActivity_getGrayImage(JNIEnv *env, jobject instance,
                                                          jintArray pixels_, jint w, jint h);
+//    JNIEXPORT void JNICALL
+//    Java_com_narkang_opencvjni_CameraActivity_grayProc(JNIEnv *env, jobject instance, jlong k);
 }
 
 

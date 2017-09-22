@@ -2,7 +2,6 @@ package com.narkang.opencvjni;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -16,12 +15,17 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-public class ListActivity extends AppCompatActivity {
+/**
+ *  参考文档： http://blog.csdn.net/ddjjll8877/article/details/52670097
+ *            http://blog.csdn.net/u011630458/article/details/43112781
+ */
+public class ListActivity extends BaseActivity {
 
     private ListView lv_opencv;
 
     private HashMap<String, Class> dates = new HashMap<String, Class>(){
         {
+            put("灰化/感应触屏/边缘检测", CameraActivity.class);
             put("灰度化", GrayActivity.class);
         }
     };

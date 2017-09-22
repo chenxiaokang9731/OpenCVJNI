@@ -21,14 +21,9 @@ include_directories(${pathToOpenCv}/sdk/native/jni/include)
 # You can define multiple libraries, and CMake builds them for you.
 # Gradle automatically packages shared libraries with your APK.
 
-add_library( # Sets the name of the library.
-             native-lib
-
-             # Sets the library as a shared library.
-             SHARED
-
-             # Provides a relative path to your source file(s).
-             src/main/cpp/native-lib.cpp )
+add_library( native-lib SHARED
+    src/main/cpp/native-lib.cpp
+    src/main/cpp/camera-lib.cpp)
 
 add_library( lib_opencv SHARED IMPORTED )
 
@@ -36,6 +31,13 @@ add_library( lib_opencv SHARED IMPORTED )
 set_target_properties(lib_opencv PROPERTIES
 IMPORTED_LOCATION
 ${pathToProject}/app/src/main/jniLibs/${ANDROID_ABI}/libopencv_java3.so)
+
+add_library( lib_opencv_core SHARED IMPORTED )
+
+#引入libopencv_core.a文件
+set_target_properties(lib_opencv_core PROPERTIES
+IMPORTED_LOCATION
+${pathToProject}/app/src/main/jniLibs/${ANDROID_ABI}/libopencv_core.a)
 
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by
@@ -55,9 +57,13 @@ find_library( # Sets the name of the path variable.
 # build script, prebuilt third-party libraries, or system libraries.
 
 target_link_libraries( # Specifies the target library.
+
                        native-lib
+
                        lib_opencv
+                       lib_opencv_core
 
                        # Links the target library to the log library
                        # included in the NDK.
-                       ${log-lib} )
+                       ${log-lib}
+                       )
